@@ -4,6 +4,10 @@ import json
 
 from Wiki import Wiki_feature
 
+#Weather Imports
+from forcast import Weather
+import forecastio
+
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -36,6 +40,12 @@ def hello_monkey():
             resp.message("Your query was not an exisiting wiki page, please use 'WIKI-FIND:' to retrieve the correct title and type it EXACTLY AS SHOWN")
         else:
             resp.message(summary_res)
+    elif txt_msg[0] == "WEATHER":
+        del txt_msg[0]
+        search_query = " ".join(txt_msg)
+
+        weatherObj = Weather(31.967819, 115.87718)
+        weatherObj.displayWeather("today")
 
     return str(resp)
 
