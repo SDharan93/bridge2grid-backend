@@ -31,10 +31,10 @@ class HackNews:
 
 			self.jsonObj.append({ "title" : cleanHeadline })
 
-			if(cleanHeadline and cleanHeadline != ""):
-				self.jsonObj.append({ "sucess" : "true" })
-			else:
-				self.jsonObj.append({ "sucess" : "false" })
+		if(cleanHeadline and cleanHeadline != ""):
+			self.jsonObj.append({ "sucess" : "true" })
+		else:
+			self.jsonObj.append({ "sucess" : "false" })
 
 		return textReturn
 

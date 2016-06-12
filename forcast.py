@@ -27,11 +27,11 @@ class Weather:
 			textReturn += timeFrame.summary
 			self.jsonObj[0]["summary"] = str(timeFrame.summary)
 
-			textReturn += '\n'
+			textReturn += "\n"
 			textReturn += timeFrame.icon
 			self.jsonObj[0]["icon"] = str(timeFrame.icon)
 
-			textReturn += '\n\n'
+			textReturn += "\n\n"
 
 			listOfTemps = []
 			numHour = 0
@@ -41,21 +41,22 @@ class Weather:
 
 				if numHour < 24:
 					numHour += 1
-					textReturn += "Time: " + str(numHour) + '\n'
+					textReturn += "Time: " + str(numHour) + "\n"
 					
-					textReturn += str(onePieceData.temperature) + '\n'
+					textReturn += str(onePieceData.temperature) + "\n"
 
 					self.jsonObj[0][str(numHour) + "Hr"] = str(onePieceData.temperature)
+					self.jsonObj[0]["icon"] = str(timeFrame.icon)
 
 		elif timeFrameUser == "today":
 			listOfTemps = []
 			numHour = 0
 			timeFrame = forecast.currently()
 
-			textReturn += timeFrame.summary + '\n'
+			textReturn += timeFrame.summary + "\n"
 			self.jsonObj[0]["summary"] = str(timeFrame.summary)
 
-			textReturn += timeFrame.icon + '\n'
+			textReturn += timeFrame.icon + "\n"
 			self.jsonObj[0]["icon"] = str(timeFrame.icon)
 
 			textReturn += "average temperature for the day: " + str(timeFrame.temperature)
@@ -68,7 +69,7 @@ class Weather:
 					numHour += 1
 					listOfTemps.append(str(onePieceData.temperature))
 
-			textReturn += '\n' + "min value for today : " + str(min(listOfTemps)) + '\n'
+			textReturn += "\n" + "min value for today : " + str(min(listOfTemps)) + "\n"
 			self.jsonObj[0]["min"] =  str(min(listOfTemps))
 
 			textReturn += "max value for today : " + str(max(listOfTemps))
@@ -77,7 +78,7 @@ class Weather:
 		elif timeFrameUser == "weekly":
 			timeFrame = forecast.daily()
 
-			textReturn += timeFrame.summary + '\n'
+			textReturn += timeFrame.summary + "\n"
 			self.jsonObj[0]["summary"] = str(timeFrame.summary)
 
 			textReturn += timeFrame.icon

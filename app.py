@@ -23,6 +23,10 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
 
+    weatherObj = Weather(31.967819, 115.87718)
+    print(weatherObj.displayWeather("hourly")) #timeframe
+    print(str(json.dumps(weatherObj.convertToJson())))
+
     #receving text
     rec_text = request.form['Body']
     resp = twilio.twiml.Response()
@@ -102,7 +106,7 @@ def hello_monkey():
 
         weatherObj = Weather(31.967819, 115.87718)
         weatherObj.displayWeather(txt_msg[0])
-        resp.message(str(weatherObj.convertToJson()))
+        resp.message(str(json.dumps(weatherObj.convertToJson())))
 
     elif txt_msg[0] == "FINANCE:":
         del txt_msg[0]
@@ -121,7 +125,7 @@ def hello_monkey():
         try:
             financeObj = Finance(txt_msg[0]) #companyCode
             financeObj.displayFinance(txt_msg[1], txt_msg[2]) #yearStart, yearEnd
-            resp.message(str(financeObj.convertToJson()))
+            resp.message(str(json.dumps(financeObj.convertToJson())))
         except:
             resp.message("The company code you chose doesn't exist, try YHOO, GOOG, AAPL, TWTR, or AMZN")
 
@@ -140,7 +144,7 @@ def hello_monkey():
 
         hackNewsObj = HackNews()
         hackNewsObj.displayHackNews(txt_msg[0])
-        resp.message(str(hackNewsObj.convertToJson()))
+        resp.message(str(json.dumps(hackNewsObj.convertToJson())))
 
     return str(resp)
 
