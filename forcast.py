@@ -29,7 +29,8 @@ class Weather:
 
 			textReturn += "\n"
 			textReturn += timeFrame.icon
-			self.jsonObj[0]["icon"] = str(timeFrame.icon)
+
+			self.jsonObj.append({ "summary" : str(timeFrame.summary) , "icon" : str(timeFrame.icon) })
 
 			textReturn += "\n\n"
 
@@ -45,8 +46,8 @@ class Weather:
 					
 					textReturn += str(onePieceData.temperature) + "\n"
 
-					self.jsonObj[0][str(numHour) + "Hr"] = str(onePieceData.temperature)
-					self.jsonObj[0]["icon"] = str(timeFrame.icon)
+					self.jsonObj.append({ str(numHour) + "Hr" : str(onePieceData.temperature) , "icon" : str(timeFrame.icon)})
+
 
 		elif timeFrameUser == "today":
 			listOfTemps = []
@@ -54,13 +55,12 @@ class Weather:
 			timeFrame = forecast.currently()
 
 			textReturn += timeFrame.summary + "\n"
-			self.jsonObj[0]["summary"] = str(timeFrame.summary)
 
 			textReturn += timeFrame.icon + "\n"
-			self.jsonObj[0]["icon"] = str(timeFrame.icon)
 
 			textReturn += "average temperature for the day: " + str(timeFrame.temperature)
-			self.jsonObj[0]["avg"] =  str(timeFrame.temperature)
+
+			self.jsonObj.append({ "summary" : str(timeFrame.summary),  "icon" : str(timeFrame.icon), "avg" : str(timeFrame.temperature) })
 
 			timeFrame = forecast.hourly()
 			for onePieceData in timeFrame.data:
@@ -70,27 +70,31 @@ class Weather:
 					listOfTemps.append(str(onePieceData.temperature))
 
 			textReturn += "\n" + "min value for today : " + str(min(listOfTemps)) + "\n"
-			self.jsonObj[0]["min"] =  str(min(listOfTemps))
 
 			textReturn += "max value for today : " + str(max(listOfTemps))
-			self.jsonObj[0]["max"] =  str(max(listOfTemps))
+
+			self.jsonObj.append({ "min" : str(min(listOfTemps)),  "max" : str(max(listOfTemps)) })
+
 
 		elif timeFrameUser == "weekly":
 			timeFrame = forecast.daily()
 
 			textReturn += timeFrame.summary + "\n"
-			self.jsonObj[0]["summary"] = str(timeFrame.summary)
-
+			
 			textReturn += timeFrame.icon
-			self.jsonObj[0]["icon"] = str(timeFrame.icon)
+			
+			self.jsonObj.append({ "summary" : str(timeFrame.summary),  "icon" : str(timeFrame.icon) })
+
 
 		else:
 			textReturn += "Format of your text should be 'WEATHER: hourly' or 'WEATHER: today' or 'WEATHER: weekly'"
 		
+		
 		if textReturn == "":
-			self.jsonObj[0]["success"] = "false"
+
+			self.jsonObj.append({ "success" : "false" })
 		else:
-			self.jsonObj[0]["success"] = "true"
+			self.jsonObj.append({ "success" : "true" })
 
 		return textReturn
 

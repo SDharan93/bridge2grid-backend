@@ -2,8 +2,6 @@ from flask import Flask, request, redirect
 import twilio.twiml
 import json
 
-#Bookmark Import
-from bookmark import Bookmark
 
 #Wiki Imports
 from Wiki import Wiki_feature
@@ -25,8 +23,6 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
-
-    weatherObj = Weather(31.967819, 115.87718)
 
     #receving text
     rec_text = request.form['Body']
