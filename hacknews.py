@@ -27,15 +27,18 @@ class HackNews:
 			uncleanHeadline = uncleanHeadline.split(' - ', 1 )
 			cleanHeadline = uncleanHeadline[1][:-1]
 			
-			textReturn += cleanHeadline + '\n'
+			textReturn += cleanHeadline + '\n\n'
 
 			self.jsonObj.append({ "title" : cleanHeadline })
 
+			if(cleanHeadline && cleanHeadline != ""):
+				self.jsonObj.append({ "sucess" : true })
+			else:
+				self.jsonObj.append({ "sucess" : false })
 
 		return textReturn
 
 	def jobAds(self):
-		print("Inside jobAds")
 
 		textReturn = ""
 
@@ -59,11 +62,17 @@ class HackNews:
 
 				textReturn += cleanHeadline + '\n'
 				
-				self.jsonObj.append({ "title" : cleanHeadline })
+				if(cleanHeadline && cleanHeadline != ""){
+					self.jsonObj.append({ "title" : cleanHeadline })
+				}
+				
 
 
 		if textReturn == "":
 			textReturn += "No jobs have been posted in Top Stories, try again tomorrow!"
+			self.jsonObj.append({ "sucess" : false })
+		else:
+			self.jsonObj.append({ "sucess" : true })
 		
 		return textReturn
 

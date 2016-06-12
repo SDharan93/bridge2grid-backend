@@ -131,7 +131,7 @@ def hello_monkey():
         search_query = " ".join(txt_msg)
 
         hackNewsObj = HackNews()
-        resp.message(hackNewsObj.displayHackNews(txt_msg[0]))
+        resp.message(str(hackNewsObj.displayHackNews(txt_msg[0])))
 
 
     elif txt_msg[0] == "HACKNEWS:APP:":
@@ -140,7 +140,7 @@ def hello_monkey():
 
         hackNewsObj = HackNews()
         hackNewsObj.displayHackNews(txt_msg[0])
-        resp.message(hackNewsObj.convertToJson())
+        resp.message(str(hackNewsObj.convertToJson()))
 
     return str(resp)
 
