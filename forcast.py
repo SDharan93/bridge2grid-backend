@@ -35,11 +35,9 @@ class Weather:
 				
 				if numHour < 24:
 					numHour += 1
-					textReturn += "Time: " + numHour
+					textReturn += "Time: " + str(numHour)
 					textReturn += '\n'
-					textReturn += onePieceData.temperature
-
-					listOfTemps.append(onePieceData.temperature)
+					textReturn += str(onePieceData.temperature)
 
 		elif timeFrameUser == "today":
 			listOfTemps = []
@@ -50,18 +48,18 @@ class Weather:
 			textReturn += '\n'
 			textReturn += timeFrame.icon
 			textReturn += '\n'
-			textReturn += "average temperature for the day: " + timeFrame.temperature
+			textReturn += "average temperature for the day: " + str(timeFrame.temperature)
 
 			timeFrame = forecast.hourly()
 			for onePieceData in timeFrame.data:
 				
 				if numHour < 24:
 					numHour += 1
-					listOfTemps.append(onePieceData.temperature)
+					listOfTemps.append(str(onePieceData.temperature))
 
-			textReturn += "min value for today : " + min(listOfTemps)
+			textReturn += "min value for today : " + str(min(listOfTemps))
 			textReturn += '\n'
-			textReturn += "max value for today : " + max(listOfTemps)
+			textReturn += "max value for today : " + str(max(listOfTemps))
 
 		elif timeFrameUser == "weekly":
 			timeFrame = forecast.daily()
