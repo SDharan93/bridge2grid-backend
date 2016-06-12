@@ -32,9 +32,9 @@ class HackNews:
 			self.jsonObj.append({ "title" : cleanHeadline })
 
 			if(cleanHeadline and cleanHeadline != ""):
-				self.jsonObj.append({ "sucess" : true })
+				self.jsonObj.append({ "sucess" : "true" })
 			else:
-				self.jsonObj.append({ "sucess" : false })
+				self.jsonObj.append({ "sucess" : "false" })
 
 		return textReturn
 
@@ -70,9 +70,9 @@ class HackNews:
 
 		if textReturn == "":
 			textReturn += "No jobs have been posted in Top Stories, try again tomorrow!"
-			self.jsonObj.append({ "sucess" : false })
+			self.jsonObj.append({ "sucess" : "false" })
 		else:
-			self.jsonObj.append({ "sucess" : true })
+			self.jsonObj.append({ "sucess" : "true" })
 		
 		return textReturn
 
