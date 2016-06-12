@@ -4,13 +4,13 @@ class Weather:
 
 
 	def __init__(self, latVal, lngVal):
-		
+
 		self.lat = latVal #31.967819
 		self.lng = lngVal #115.87718
 		#time = "2016-06-13T12:00:00"
 
 	def displayWeather(self, timeFrameUserVal):
-		textReturn = "";		
+		textReturn = "";
 
 		api_key = "ece623732956ab6653653c4cec4247fa"
 		#load the forcast for the latitute and longitude
@@ -32,7 +32,7 @@ class Weather:
 
 			textReturn += "Hourly temperature for today"
 			for onePieceData in timeFrame.data:
-				
+
 				if numHour < 24:
 					numHour += 1
 					textReturn += "Time: " + str(numHour)
@@ -52,7 +52,7 @@ class Weather:
 
 			timeFrame = forecast.hourly()
 			for onePieceData in timeFrame.data:
-				
+
 				if numHour < 24:
 					numHour += 1
 					listOfTemps.append(str(onePieceData.temperature))
@@ -67,5 +67,6 @@ class Weather:
 			textReturn += timeFrame.summary
 			textReturn += '\n'
 			textReturn += timeFrame.icon
-
+		else:
+			textReturn += "Format of your text should be 'WEATHER: hourly' or 'WEATHER: today' or 'WEATHER: weekly'"
 		return textReturn

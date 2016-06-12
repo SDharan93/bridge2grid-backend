@@ -15,19 +15,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
-
-    yahoo = Share('YHOO')
-
-    print(yahoo.get_open())
-    print(yahoo.get_price())
-    print(yahoo.get_trade_datetime())
-    print(yahoo.get_dividend_share())
-    print(yahoo.get_historical('2014-04-25', '2014-04-29'))
-    print(yahoo.get_year_high())
-    print(yahoo.get_year_low())
-
     #receving text
-    """Respond to incoming calls with a simple text message."""
     rec_text = request.form['Body']
     resp = twilio.twiml.Response()
 
@@ -54,7 +42,7 @@ def hello_monkey():
             resp.message("Your query was not an exisiting wiki page, please use 'WIKI-FIND:' to retrieve the correct title and type it EXACTLY AS SHOWN")
         else:
             resp.message(summary_res)
-    elif txt_msg[0] == "WEATHER":
+    elif txt_msg[0] == "WEATHER:":
         del txt_msg[0]
         search_query = " ".join(txt_msg)
 
