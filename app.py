@@ -45,7 +45,7 @@ def hello_monkey():
         search_query = " ".join(txt_msg)
 
         weatherObj = Weather(31.967819, 115.87718)
-        weatherObj.displayWeather("today")
+        resp.message(weatherObj.displayWeather(txt_msg[0]))
 
     return str(resp)
 

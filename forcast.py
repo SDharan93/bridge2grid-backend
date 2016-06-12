@@ -10,7 +10,7 @@ class Weather:
 		#time = "2016-06-13T12:00:00"
 
 	def displayWeather(self, timeFrameUserVal):
-		
+		textReturn = "";		
 
 		api_key = "ece623732956ab6653653c4cec4247fa"
 		#load the forcast for the latitute and longitude
@@ -22,19 +22,22 @@ class Weather:
 		if timeFrameUser == "hourly":
 			timeFrame = forecast.hourly()
 
-			print(timeFrame.summary)
-			print(timeFrame.icon)
-			
+			textReturn += timeFrame.summary
+			textReturn += '\n'
+			textReturn += timeFrame.icon
+			textReturn += '\n\n'
+
 			listOfTemps = []
 			numHour = 0
 
-			print("Hourly temperature for today")
+			textReturn += "Hourly temperature for today"
 			for onePieceData in timeFrame.data:
 				
 				if numHour < 24:
 					numHour += 1
-					print("Time: ", numHour)
-					print(onePieceData.temperature)
+					textReturn += "Time: " + numHour
+					textReturn += '\n'
+					textReturn += onePieceData.temperature
 
 					listOfTemps.append(onePieceData.temperature)
 
@@ -43,9 +46,11 @@ class Weather:
 			numHour = 0
 			timeFrame = forecast.currently()
 
-			print(timeFrame.summary)
-			print(timeFrame.icon)
-			print("average temperature for the day: ", timeFrame.temperature)
+			textReturn += timeFrame.summary
+			textReturn += '\n'
+			textReturn += timeFrame.icon
+			textReturn += '\n'
+			textReturn += "average temperature for the day: " + timeFrame.temperature
 
 			timeFrame = forecast.hourly()
 			for onePieceData in timeFrame.data:
@@ -54,11 +59,15 @@ class Weather:
 					numHour += 1
 					listOfTemps.append(onePieceData.temperature)
 
-			print("min value for today : ", min(listOfTemps))
-			print("max value for today : ", max(listOfTemps))
+			textReturn += "min value for today : " + min(listOfTemps)
+			textReturn += '\n'
+			textReturn += "max value for today : " + max(listOfTemps)
 
 		elif timeFrameUser == "weekly":
 			timeFrame = forecast.daily()
 
-			print(timeFrame.summary)
-			print(timeFrame.icon)
+			textReturn += timeFrame.summary
+			textReturn += '\n'
+			textReturn += timeFrame.icon
+
+		return textReturn
