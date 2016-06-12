@@ -29,6 +29,9 @@ def hello_monkey():
 
     #parsing text
     txt_msg = str(rec_text).split()
+    json_type = ""
+    json_result = 0
+
 
     if txt_msg[0] == "WIKI-FIND:":
         del txt_msg[0]
@@ -41,10 +44,20 @@ def hello_monkey():
             resp.message("Error occured please try again.")
         else:
             if(len(search_res) > 0):
+                resp.message("Possible Search results for '"+ search_query +"': \n" + ", \n".join(search_res))
+
+    elif txt_msg[0] == "WIKI-FIND:APP:":
+        del txt_msg[0]
+        search_query = " ".join(txt_msg)
+        try:
+            search_res = Wiki_feature.search(search_query)
+            json_type = "find"
+        except:
+            resp.message("Error occured please try again.")
+        else:
+            if(len(search_res) > 0):
                 json_result = 2
-                print("Possible Search results for '"+ search_query +"': \n" + ", \n".join(search_res))
                 resp.message(Json_Data.search_results_json(item=", \n".join(search_res), function=json_type, result=json_result))
-                print(Json_Data.search_results_json(item=", \n".join(search_res), function=json_type, result=json_result))
             else:
                 json_result = 0
                 resp.message(Json_Data.search_results_json(item="There is no wiki pages related to your query.", function=json_type, result=json_result))
@@ -57,11 +70,21 @@ def hello_monkey():
             summary_res = Wiki_feature.summary(search_query)
             json_type = "search"
         except:
+            resp.message("Your query was not an exisiting wiki page, please use 'WIKI-FIND:' to retrieve the correct title and type it EXACTLY AS SHOWN")
+        else:
+            resp.message(summary_res)
+
+    elif txt_msg[0] == "WIKI-SEARCH:APP:":
+        del txt_msg[0]
+        search_query = " ".join(txt_msg)
+            #Returns possible results for query
+        try:
+            summary_res = Wiki_feature.summary(search_query)
+            json_type = "search"
+        except:
             json_result = 0
             resp.message(Json_Data.search_results_json(item="Your query was not an exisiting wiki page, please use 'WIKI-FIND:' to retrieve the correct title and type it EXACTLY AS SHOWN", function=json_type, result=json_result))
-            print("Your query was not an exisiting wiki page, please use 'WIKI-FIND:' to retrieve the correct title and type it EXACTLY AS SHOWN")
         else:
-            print(summary_res)
             json_result = 1
             resp.message(Json_Data.search_results_json(item=summary_res, function=json_type, result=json_result))
 
