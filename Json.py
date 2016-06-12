@@ -1,12 +1,15 @@
 class Json_Data():
 #ACCEPTS A STRING
-    def search_results_json(find_results):
-        find_results = find_results.split(", \n")
-        json_data = "results: ["
+    def search_results_json(item, function, result):
+        json_data = "[{\"function\": \""+ function +"\"}, {\"result\": \""+ str(result) +"\"}, "
+        if(function == "find"):
+            item = item.split(", \n")
+            for item_type in item:
+                json_data += "{\"item\": \"" + item_type + "\"}, "
+            size = len(json_data) - 2
+            json_data = json_data[:size] + json_data[size+2:]
+            json_data += " ]"
+        elif(function == "search"):
+            json_data += "{\"item\": \"" + item + "\"}]"
 
-        for results in find_results:
-            json_data += "{Item:" + results + "},"
-        size = len(json_data) - 1
-        json_data = json_data[:size] + json_data[size+1:]
-        json_data += "]"
         return json_data
