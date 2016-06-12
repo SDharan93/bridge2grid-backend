@@ -26,7 +26,7 @@ class HackNews:
 			uncleanHeadline = str(self.hn.get_item(story_id))
 			uncleanHeadline = uncleanHeadline.split(' - ', 1 )
 			cleanHeadline = uncleanHeadline[1][:-1]
-			
+
 			textReturn += cleanHeadline + '\n\n'
 
 			self.jsonObj.append({ "title" : cleanHeadline })
@@ -49,7 +49,7 @@ class HackNews:
 			numLoops += 1
 
 			story = self.hn.get_item(story_id)
-			
+
 			if numLoops >= 10:
 				break
 
@@ -57,15 +57,15 @@ class HackNews:
 
 				uncleanHeadline = str(story)
 				uncleanHeadline = uncleanHeadline.split(' - ', 1 )
-				
+
 				cleanHeadline = uncleanHeadline[1][:-1]
 
 				textReturn += cleanHeadline + '\n'
-				
+
 				if cleanHeadline and cleanHeadline != "":
 					self.jsonObj.append({ "title" : cleanHeadline })
-				
-				
+
+
 
 
 		if textReturn == "":
@@ -73,7 +73,7 @@ class HackNews:
 			self.jsonObj.append({ "sucess" : "false" })
 		else:
 			self.jsonObj.append({ "sucess" : "true" })
-		
+
 		return textReturn
 
 	def convertToJson(self):
