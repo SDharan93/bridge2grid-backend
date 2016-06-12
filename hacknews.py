@@ -31,7 +31,7 @@ class HackNews:
 
 			self.jsonObj.append({ "title" : cleanHeadline })
 
-			if(cleanHeadline && cleanHeadline != ""):
+			if(cleanHeadline and cleanHeadline != ""):
 				self.jsonObj.append({ "sucess" : true })
 			else:
 				self.jsonObj.append({ "sucess" : false })
@@ -62,7 +62,7 @@ class HackNews:
 
 				textReturn += cleanHeadline + '\n'
 				
-				if(cleanHeadline && cleanHeadline != ""){
+				if(cleanHeadline and cleanHeadline != ""){
 					self.jsonObj.append({ "title" : cleanHeadline })
 				}
 				

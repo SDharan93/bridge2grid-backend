@@ -85,6 +85,12 @@ class Weather:
 
 		else:
 			textReturn += "Format of your text should be 'WEATHER: hourly' or 'WEATHER: today' or 'WEATHER: weekly'"
+		
+		if textReturn = "":
+			self.jsonObj[0]["success"] = "false"
+		else:
+			self.jsonObj[0]["success"] = "true"
+			
 		return textReturn
 
 	def convertToJson(self):
