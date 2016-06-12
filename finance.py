@@ -45,7 +45,7 @@ class Finance:
 				self.jsonObj[0][dict['Date'] + "High"] = dict['High']
 				self.jsonObj[0][dict['Date'] + "Low"] = dict['Low']
 
-		if textReturn = "":
+		if textReturn == "":
 			self.jsonObj[0]["success"] = "false"
 		else:
 			self.jsonObj[0]["success"] = "true"
