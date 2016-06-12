@@ -56,7 +56,7 @@ class Weather:
 				if numHour < 24:
 					numHour += 1
 					listOfTemps.append(str(onePieceData.temperature))
-
+			textReturn += '\n'
 			textReturn += "min value for today : " + str(min(listOfTemps))
 			textReturn += '\n'
 			textReturn += "max value for today : " + str(max(listOfTemps))
