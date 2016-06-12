@@ -2,6 +2,9 @@ from flask import Flask, request, redirect
 import twilio.twiml
 import json
 
+#Bookmark Import
+from bookmark import Bookmark
+
 #Wiki Imports
 from Wiki import Wiki_feature
 from Json import Json_Data
@@ -24,8 +27,6 @@ app = Flask(__name__)
 def hello_monkey():
 
     weatherObj = Weather(31.967819, 115.87718)
-    print(weatherObj.displayWeather("hourly")) #timeframe
-    print(str(json.dumps(weatherObj.convertToJson())))
 
     #receving text
     rec_text = request.form['Body']
@@ -35,7 +36,7 @@ def hello_monkey():
     txt_msg = str(rec_text).split()
     json_type = ""
     json_result = 0
-
+    temp_mem = ""
 
     if txt_msg[0] == "WIKI-FIND:":
         del txt_msg[0]
